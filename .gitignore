@@ -1,0 +1,5 @@
+bin/
+*.class
+data/*.csv
+data/*.bak
+data/*.tmp
