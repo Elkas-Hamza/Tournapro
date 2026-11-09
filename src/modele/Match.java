@@ -17,7 +17,7 @@ public class Match {
     private boolean termine;
     private LocalDate datePrevue;
 
-    public Match() {
+    public Match(String id) {
     }
 
     public Match(String id, String tournoiId, int tour, int position,
