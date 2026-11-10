@@ -1,50 +1,48 @@
 package modele;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
+/**
+ * Représente un joueur, participant individuel.
+ */
+public class Joueur extends Participant {
 
-public class Joueur {
-
-    private String id;
-    private String nom;
     private String prenom;
     private String pseudo;
     private LocalDate dateNaissance;
-    private LocalDate dateInscription;
 
     public Joueur() {
+        super();
     }
 
-    public Joueur(String id, String nom, String prenom, String pseudo,LocalDate dateNaissance, LocalDate dateInscription) {
-        this.id = id;
-        this.nom = nom;
+    public Joueur(String id, String nom, String prenom, String pseudo,
+                  LocalDate dateNaissance, LocalDate dateInscription) {
+        super(id, nom, dateInscription);
         this.prenom = prenom;
         this.pseudo = pseudo;
         this.dateNaissance = dateNaissance;
-        this.dateInscription = dateInscription;
     }
 
-
+    /**
+     * Retourne le nom affichable du joueur, par exemple
+     * « alice (Alice A) ».
+     */
+    @Override
     public String getNomAffichage() {
-        String identite = ((nom == null ? "" : nom.trim()) + " "+ (prenom == null ? "" : prenom.trim())).trim();
+        String identite = ((getNom() == null ? "" : getNom().trim()) + " "
+                + (prenom == null ? "" : prenom.trim())).trim();
+        if (pseudo == null || pseudo.isBlank()) {
             return identite;
+        }
+        String valeurPseudo = pseudo.trim();
+        return identite.isEmpty()
+                ? valeurPseudo
+                : valeurPseudo + " (" + identite + ")";
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    @Override
+    public String getType() {
+        return "INDIVIDUEL";
     }
 
     public String getPrenom() {
@@ -69,32 +67,5 @@ public class Joueur {
 
     public void setDateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
-    }
-
-    public LocalDate getDateInscription() {
-        return dateInscription;
-    }
-
-    public void setDateInscription(LocalDate dateInscription) {
-        this.dateInscription = dateInscription;
-    }
-
-    @Override
-    public boolean equals(Object objet) {
-        if (this == objet) {
-            return true;
-        }
-        if (!(objet instanceof Joueur)) {
-            return false;
-        }
-        Joueur autre = (Joueur) objet;
-        return id != null && Objects.equals(id, autre.id);
-    }
-
-
-
-    @Override
-    public String toString() {
-        return getNomAffichage();
     }
 }

@@ -1,2 +1,0 @@
-# Tournapro
-app java console
